@@ -1,0 +1,50 @@
+:root {
+  /* Cores Primárias */
+  --color-primary: #7c3aed;
+  --color-primary-dark: #6d28d9;
+  --color-primary-light: #8b5cf6;
+  --color-accent: #d4a800;
+
+  /* Fundo e Superfícies */
+  --color-bg: #f7f5ff;
+  --color-surface: #ffffff;
+  --color-divider: #ede9fe;
+
+  /* Texto */
+  --color-text-primary: #1e1b2e;
+  --color-text-secondary: #6e6b7b;
+  --color-text-on-primary: #ffffff;
+
+  /* Status */
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-error: #ed3237;
+  --color-info: #2196f3;
+  --color-pending: #ffc107;
+
+  /* Spacing (base 8px) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Layout */
+  --sidebar-width: 240px;
+  --header-height: 64px;
+
+  /* Shadows — tinted purple */
+  --shadow-sm: 0 1px 3px rgba(109, 40, 217, 0.10), 0 1px 2px rgba(109, 40, 217, 0.18);
+  --shadow-md: 0 3px 6px rgba(109, 40, 217, 0.13), 0 2px 4px rgba(109, 40, 217, 0.10);
+  --shadow-lg: 0 10px 40px rgba(109, 40, 217, 0.14), 0 2px 4px rgba(109, 40, 217, 0.10);
+
+  /* Transitions */
+  --transition-fast: 200ms ease;
+  --transition-base: 300ms ease;
+}
