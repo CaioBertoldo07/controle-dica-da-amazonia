@@ -71,7 +71,7 @@ O site público da empresa é utilizado **apenas como referência de identidade 
 | --------------- | ----------------------- |
 | Versionamento   | Git + GitHub            |
 | CI/CD           | GitHub Actions (futuro) |
-| Containerização | Docker (opcional)       |
+| Containerização | Docker + Docker Compose |
 | Hospedagem      | A definir               |
 
 ## 📁 Estrutura do Backend
@@ -331,7 +331,124 @@ frontend/
 - Senha nunca armazenada em texto
 - Comunicação HTTPS obrigatória
 
-## 📦 Padrões de Projeto
+## � Docker
+
+O banco de dados e o backend rodam em containers Docker, gerenciados via **Docker Compose**. O frontend continua rodando localmente durante o desenvolvimento (ou pode ser adicionado ao Compose futuramente).
+
+### Estrutura dos Containers
+
+```
+docker-compose.yml
+├── db          → MySQL 8.0 (porta 3306)
+└── backend     → Node.js + Express (porta 3333)
+```
+
+### `docker-compose.yml` (referência)
+
+```yaml
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: dica_amazonia_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dica_amazonia_backend
+    restart: always
+    env_file:
+      - ./backend/.env
+    ports:
+      - "3333:3333"
+    depends_on:
+      - db
+    networks:
+      - app_network
+
+volumes:
+  db_data:
+
+networks:
+  app_network:
+    driver: bridge
+```
+
+### `backend/Dockerfile` (referência)
+
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+RUN npm run build
+
+EXPOSE 3333
+CMD ["node", "dist/app.js"]
+```
+
+### Variáveis de Ambiente
+
+As variáveis do container são definidas no arquivo `backend/.env` (nunca versionado). O `.env.example` serve como referência:
+
+```env
+# Banco de Dados
+DB_HOST=db
+DB_PORT=3306
+DB_NAME=dica_amazonia
+DB_USER=app_user
+DB_PASSWORD=
+DB_ROOT_PASSWORD=
+
+# Backend
+PORT=3333
+JWT_SECRET=
+JWT_EXPIRES_IN=7d
+
+# Prisma
+DATABASE_URL=mysql://${DB_USER}:${DB_PASSWORD}@db:3306/${DB_NAME}
+```
+
+### Comandos Úteis
+
+```bash
+# Subir ambiente completo
+docker compose up -d
+
+# Ver logs do backend
+docker compose logs -f backend
+
+# Rodar migrations do Prisma dentro do container
+docker compose exec backend npx prisma migrate deploy
+
+# Derrubar containers
+docker compose down
+
+# Derrubar e remover volumes (apaga o banco!)
+docker compose down -v
+```
+
+---
+
+## �📦 Padrões de Projeto
 
 ### MVC (Model-View-Controller)
 

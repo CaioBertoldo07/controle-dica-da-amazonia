@@ -61,11 +61,23 @@ Preparar infraestrutura básica, autenticação e banco de dados.
 
 **Duração:** 2 dias
 
-### 1.2 Banco de Dados
+### 1.2 Docker
 
-**MySQL Setup:**
+**Configuração dos Containers:**
 
-- [ ] Criar banco de dados teste/produção
+- [ ] Criar `docker-compose.yml` (serviços: `db` + `backend`)
+- [ ] Criar `backend/Dockerfile`
+- [ ] Criar `backend/.env.example` com variáveis do container
+- [ ] Subir container MySQL e validar conexão
+- [ ] Configurar volume persistente para os dados do banco
+
+**Duração:** 1 dia
+
+### 1.3 Banco de Dados
+
+**MySQL Setup (via Docker):**
+
+- [ ] Validar conexão Prisma → container `db`
 - [ ] Configurar Prisma
 - [ ] Criar arquivo prisma/schema.prisma base
 - [ ] Gerar client Prisma
@@ -78,7 +90,7 @@ Preparar infraestrutura básica, autenticação e banco de dados.
 
 **Duração:** 2 dias
 
-### 1.3 Autenticação
+### 1.4 Autenticação
 
 **Backend:**
 
@@ -98,7 +110,7 @@ Preparar infraestrutura básica, autenticação e banco de dados.
 
 **Duração:** 3 dias
 
-### 1.4 Setup Inicial de UI
+### 1.5 Setup Inicial de UI
 
 **Frontend:**
 
@@ -110,7 +122,7 @@ Preparar infraestrutura básica, autenticação e banco de dados.
 
 **Duração:** 2 dias
 
-**Estimativa Total Phase 1: 9 dias**
+**Estimativa Total Phase 1: 10 dias**
 
 ---
 
@@ -408,7 +420,7 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 
 - [ ] Testes de componentes
 - [ ] Testes de integração
-- [ ] Testes E2E (Cypress/Playwright)
+- [ ] Testes E2E (Playwright)
 - [ ] Checklist de cross-browser
 - [ ] Checklist de responsividade
 
