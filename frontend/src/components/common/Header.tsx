@@ -7,12 +7,13 @@ export function Header() {
     <header
       style={{
         height: 'var(--header-height)',
-        background: 'var(--color-primary)',
+        background: 'var(--color-sidebar-bg)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 var(--space-lg)',
         boxShadow: 'var(--shadow-sm)',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
         position: 'sticky',
         top: 0,
         zIndex: 100,
@@ -27,26 +28,29 @@ export function Header() {
           gap: 'var(--space-sm)',
         }}
       >
-        <span
-          style={{
-            fontSize: 20,
-            fontWeight: 700,
-            color: 'var(--color-text-on-primary)',
-            letterSpacing: '-0.3px',
-          }}
-        >
-          🌿 Dica da Amazônia
-        </span>
-        <span
-          style={{
-            fontSize: 11,
-            fontWeight: 500,
-            color: 'rgba(255,255,255,0.65)',
-            marginTop: 2,
-          }}
-        >
-          Controle Interno
-        </span>
+        <span style={{ fontSize: 22, lineHeight: 1 }}>🌿</span>
+        <div>
+          <div
+            style={{
+              fontSize: 16,
+              fontWeight: 700,
+              color: 'var(--color-text-on-primary)',
+              letterSpacing: '-0.2px',
+              lineHeight: 1.2,
+            }}
+          >
+            Dica da Amazônia
+          </div>
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 400,
+              color: 'rgba(255,255,255,0.55)',
+            }}
+          >
+            Controle Interno
+          </div>
+        </div>
       </div>
 
       {/* Usuário + Logout */}
@@ -57,7 +61,7 @@ export function Header() {
               style={{
                 fontSize: 14,
                 fontWeight: 600,
-                color: 'var(--color-text-on-primary)',
+                color: '#ffffff',
               }}
             >
               {user.name}
@@ -65,7 +69,7 @@ export function Header() {
             <div
               style={{
                 fontSize: 11,
-                color: 'rgba(255,255,255,0.65)',
+                color: 'rgba(255,255,255,0.55)',
                 textTransform: 'capitalize',
               }}
             >
@@ -77,24 +81,26 @@ export function Header() {
         <button
           onClick={logoutAndRedirect}
           style={{
-            background: 'rgba(255,255,255,0.15)',
-            border: '1px solid rgba(255,255,255,0.3)',
-            color: 'var(--color-text-on-primary)',
+            background: 'transparent',
+            border: '1px solid rgba(255,255,255,0.45)',
+            color: '#ffffff',
             borderRadius: 'var(--radius-md)',
-            padding: '6px 14px',
+            padding: '6px 16px',
             fontSize: 13,
             fontWeight: 600,
             cursor: 'pointer',
-            transition: 'background var(--transition-fast)',
+            transition: 'all var(--transition-fast)',
           }}
           onMouseEnter={(e) => {
-            (e.target as HTMLButtonElement).style.background = 'rgba(255,255,255,0.25)';
+            const el = e.target as HTMLButtonElement;
+            el.style.background = 'rgba(255,255,255,0.15)';
           }}
           onMouseLeave={(e) => {
-            (e.target as HTMLButtonElement).style.background = 'rgba(255,255,255,0.15)';
+            const el = e.target as HTMLButtonElement;
+            el.style.background = 'transparent';
           }}
         >
-          Sair
+          Logout
         </button>
       </div>
     </header>

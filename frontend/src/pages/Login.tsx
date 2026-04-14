@@ -60,7 +60,7 @@ export function Login() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg, #1e1b2e 0%, #4c1d95 50%, #6d28d9 100%)',
+        background: 'var(--color-bg)',
         padding: 'var(--space-lg)',
       }}
     >
@@ -71,17 +71,17 @@ export function Login() {
           boxShadow: 'var(--shadow-lg)',
           padding: 'var(--space-2xl)',
           width: '100%',
-          maxWidth: 420,
+          maxWidth: 400,
         }}
       >
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
-          <div style={{ fontSize: 40, marginBottom: 'var(--space-sm)' }}>🌿</div>
+          <div style={{ fontSize: 36, marginBottom: 'var(--space-sm)' }}>🌿</div>
           <h1
             style={{
               fontSize: 22,
               fontWeight: 700,
-              color: 'var(--color-primary)',
+              color: 'var(--color-text-primary)',
               marginBottom: 4,
             }}
           >

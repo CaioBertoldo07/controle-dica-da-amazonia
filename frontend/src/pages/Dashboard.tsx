@@ -26,6 +26,7 @@ export function Dashboard() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            background: 'var(--color-bg)',
           }}
         >
           <div
@@ -40,13 +41,13 @@ export function Dashboard() {
             }}
           >
             {/* Icon */}
-            <div style={{ fontSize: 56, marginBottom: 'var(--space-lg)' }}>🌿</div>
+            <div style={{ fontSize: 48, marginBottom: 'var(--space-lg)' }}>🌿</div>
 
             <h1
               style={{
                 fontSize: 24,
                 fontWeight: 700,
-                color: 'var(--color-primary)',
+                color: 'var(--color-text-primary)',
                 marginBottom: 'var(--space-sm)',
               }}
             >
@@ -69,10 +70,8 @@ export function Dashboard() {
                 style={{
                   background: 'var(--color-bg)',
                   borderRadius: 'var(--radius-md)',
-                  padding: 'var(--space-lg)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'var(--space-sm)',
+                  border: '1px solid var(--color-divider)',
+                  overflow: 'hidden',
                 }}
               >
                 <InfoRow label="Nome" value={user.name} />
@@ -95,6 +94,8 @@ function InfoRow({ label, value }: { label: string; value: string }) {
         justifyContent: 'space-between',
         alignItems: 'center',
         fontSize: 14,
+        padding: '12px var(--space-lg)',
+        borderBottom: '1px solid var(--color-divider)',
       }}
     >
       <span style={{ color: 'var(--color-text-secondary)', fontWeight: 500 }}>{label}</span>

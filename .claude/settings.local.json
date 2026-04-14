@@ -8,7 +8,11 @@
       "Bash(DATABASE_URL=\"mysql://app_user:changeme@localhost:3306/dica_amazonia\" npx ts-node --transpile-only prisma/seed.ts)",
       "Bash(curl -s http://localhost:3333/health)",
       "Bash(python -m json.tool)",
-      "Bash(curl -s -X POST http://localhost:3333/api/auth/login -H \"Content-Type: application/json\" -d '{\"email\":\"admin@dicadaamazonia.com.br\",\"password\":\"Admin@2024\"}')"
+      "Bash(curl -s -X POST http://localhost:3333/api/auth/login -H \"Content-Type: application/json\" -d '{\"email\":\"admin@dicadaamazonia.com.br\",\"password\":\"Admin@2024\"}')",
+      "Bash(ls -la /c/Users/UEA-EST/Documents/GitHub/controle-dica-da-amazonia/frontend/.env*)",
+      "Bash(cat)",
+      "Read(//tmp/**)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

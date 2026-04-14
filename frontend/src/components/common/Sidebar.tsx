@@ -21,7 +21,7 @@ export function Sidebar() {
     <aside
       style={{
         width: 'var(--sidebar-width)',
-        background: '#6d28d9',
+        background: 'var(--color-sidebar-bg)',
         display: 'flex',
         flexDirection: 'column',
         flexShrink: 0,
@@ -39,7 +39,7 @@ export function Sidebar() {
                   alignItems: 'center',
                   gap: 'var(--space-sm)',
                   padding: '12px var(--space-lg)',
-                  color: 'rgba(255,255,255,0.35)',
+                  color: 'rgba(255,255,255,0.30)',
                   fontSize: 14,
                   fontWeight: 500,
                   cursor: 'not-allowed',
@@ -52,9 +52,10 @@ export function Sidebar() {
                   style={{
                     marginLeft: 'auto',
                     fontSize: 10,
-                    background: 'rgba(255,255,255,0.1)',
+                    background: 'rgba(255,255,255,0.08)',
                     padding: '2px 6px',
                     borderRadius: 4,
+                    color: 'rgba(255,255,255,0.35)',
                   }}
                 >
                   em breve
@@ -73,23 +74,23 @@ export function Sidebar() {
                 alignItems: 'center',
                 gap: 'var(--space-sm)',
                 padding: '12px var(--space-lg)',
-                color: isActive ? '#ffffff' : 'rgba(255,255,255,0.7)',
+                color: isActive ? '#ffffff' : 'rgba(255,255,255,0.65)',
                 fontSize: 14,
                 fontWeight: isActive ? 600 : 500,
-                background: isActive ? 'rgba(255,255,255,0.15)' : 'transparent',
-                borderLeft: isActive ? '3px solid #a78bfa' : '3px solid transparent',
+                background: isActive ? 'rgba(255,255,255,0.12)' : 'transparent',
+                borderLeft: isActive ? '3px solid #7ec87a' : '3px solid transparent',
                 transition: 'all var(--transition-fast)',
                 textDecoration: 'none',
               })}
               onMouseEnter={(e) => {
                 const el = e.currentTarget;
-                if (!el.style.borderLeft.includes('a78bfa')) {
-                  el.style.background = 'rgba(255,255,255,0.08)';
+                if (!el.style.borderLeft.includes('7ec87a')) {
+                  el.style.background = 'rgba(255,255,255,0.07)';
                 }
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget;
-                if (!el.style.borderLeft.includes('a78bfa')) {
+                if (!el.style.borderLeft.includes('7ec87a')) {
                   el.style.background = 'transparent';
                 }
               }}
@@ -104,9 +105,9 @@ export function Sidebar() {
       <div
         style={{
           padding: 'var(--space-md) var(--space-lg)',
-          borderTop: '1px solid rgba(255,255,255,0.1)',
+          borderTop: '1px solid rgba(255,255,255,0.08)',
           fontSize: 11,
-          color: 'rgba(255,255,255,0.35)',
+          color: 'rgba(255,255,255,0.25)',
         }}
       >
         Phase 1 — Foundation
