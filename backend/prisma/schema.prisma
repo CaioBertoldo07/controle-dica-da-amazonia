@@ -27,6 +27,16 @@ enum PackagingType {
   ESPECIAL
 }
 
+enum OrderStatus {
+  PENDENTE
+  PROCESSANDO
+  PRODUCAO
+  PREPARADO
+  ENVIADO
+  ENTREGUE
+  CANCELADO
+}
+
 // ─── Models ───────────────────────────────────────────────────────────────────
 
 model User {
@@ -66,6 +76,8 @@ model Client {
   createdAt         DateTime   @default(now())
   updatedAt         DateTime   @updatedAt
 
+  orders Order[]
+
   @@index([type, isActive])
   @@map("clients")
 }
@@ -103,6 +115,40 @@ model Product {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
+  orderItems OrderItem[]
+
   @@index([isActive])
   @@map("products")
+}
+
+model Order {
+  id           String      @id @default(uuid())
+  orderNumber  String      @unique @db.VarChar(20)
+  clientId     String      @map("client_id")
+  client       Client      @relation(fields: [clientId], references: [id])
+  status       OrderStatus @default(PENDENTE)
+  total        Decimal     @db.Decimal(10, 2)
+  notes        String?     @db.Text
+  cancelReason String?     @db.Text
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  items OrderItem[]
+
+  @@index([clientId])
+  @@index([status])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String  @map("order_id")
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String  @map("product_id")
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  unitPrice Decimal @db.Decimal(10, 2)
+  subtotal  Decimal @db.Decimal(10, 2)
+
+  @@map("order_items")
 }

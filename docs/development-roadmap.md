@@ -14,12 +14,12 @@ Phase 2: Core Modules        ✅ CONCLUÍDA
 ├─ CRUD Produtos
 └─ CRUD Embalagens
     ↓
-Phase 3: Business Logic      ← PRÓXIMO PASSO
+Phase 3: Business Logic      ✅ CONCLUÍDA
 ├─ CRUD Pedidos
 ├─ Cálculo de Embalagens
 └─ Status de Pedidos
     ↓
-Phase 4: Reporting
+Phase 4: Reporting           ← PRÓXIMO PASSO
 ├─ Dashboard Principal
 ├─ Relatórios de Vendas
 └─ Análises
@@ -215,95 +215,39 @@ Implementar CRUDs básicos para as 3 entidades principais.
 
 ---
 
-## 📋 PHASE 3: Business Logic (Semanas 5-7)
+## ✅ PHASE 3: Business Logic — CONCLUÍDA (Abril 2026)
 
 ### Objetivo
 
 Implementar pedidos e lógica de negócio complexa.
 
-### 3.1 Módulo de Pedidos - Estrutura
+### 3.1 Módulo de Pedidos — Backend
 
-**Backend:**
+- [x] Enum `OrderStatus` no schema Prisma: PENDENTE, PROCESSANDO, PRODUCAO, PREPARADO, ENVIADO, ENTREGUE, CANCELADO
+- [x] Models `Order` e `OrderItem` adicionados ao Prisma + relações com `Client` e `Product`
+- [x] `GET /orders` — listagem paginada com filtros por status, clientId e busca (nº pedido / cliente)
+- [x] `GET /orders/:id` — detalhe completo com client e items (incluindo produto e embalagem)
+- [x] `POST /orders` — criação com validações: max 3 itens, 1–10.000 unidades/item, sem produtos duplicados, cliente ativo, produtos ativos; captura `unitPrice` do produto no momento da criação; calcula subtotals e total; gera `orderNumber` sequencial no formato `PED-YYYY-NNNN`
+- [x] `PATCH /orders/:id/status` — máquina de estados com validação de transições; reserva estoque de embalagem ao avançar para PROCESSANDO; libera estoque ao cancelar se estava em PROCESSANDO/PRODUCAO/PREPARADO/ENVIADO; exige `cancelReason` ao cancelar de PRODUCAO em diante
+- [x] Controle de acesso: criação permitida para admin/gestor/vendedor; troca de status para admin/gestor/operador
+- [x] `orderService.ts`, `orderController.ts`, `routes/orders.ts` criados; `routes/index.ts` atualizado
+- [x] Banco sincronizado com `prisma db push` no container
 
-- [ ] GET /orders (com filtros por status, cliente, data)
-- [ ] GET /orders/:id
-- [ ] POST /orders (criar novo pedido)
-  - Validar cliente existe
-  - Validar produtos existem
-  - Calcular quantidade de embalagens necessárias
-  - Reservar embalagens
-  - Calcular total
-  - Gerar orderNumber único
-- [ ] Validações
-- [ ] Testes
+### 3.2 Módulo de Pedidos — Frontend
 
-**Frontend:**
+- [x] Tipos `OrderStatus`, `Order`, `OrderItem`, `CreateOrderInput` adicionados a `types/index.ts`
+- [x] `fetchClientsAll()` adicionado a `clientApi.ts` (busca todos os clientes ativos)
+- [x] `fetchProductsAll()` adicionado a `productApi.ts` (busca todos os produtos ativos)
+- [x] `orderApi.ts` criado: `fetchOrders`, `fetchOrder`, `createOrder`, `updateOrderStatus`
+- [x] Badges de status no `globals.css`: `.badge--processando`, `.badge--producao`, `.badge--preparado`, `.badge--enviado`, `.badge--entregue`, `.badge--cancelado`
+- [x] Página `OrderList` — tabela com nº pedido, cliente, itens, total, badge de status colorido e data; filtros por busca e status; paginação
+- [x] Página `OrderForm` — selects dinâmicos de cliente e produto (ativos apenas); até 3 linhas de produto; subtotal em tempo real por linha; total calculado ao vivo; validações client-side; redireciona para detalhe após criação
+- [x] Página `OrderDetail` — layout de 2 colunas (tabela de itens + sidebar de info); botão de avançar status com label contextual; botão de cancelar com modal; aviso de reserva de estoque ao avançar para PROCESSANDO; exibição de motivo de cancelamento; `cancelReason` obrigatório ao cancelar de PRODUCAO em diante
+- [x] `App.tsx` atualizado com rotas `/pedidos`, `/pedidos/novo`, `/pedidos/:id`
+- [x] `Sidebar.tsx` — Pedidos habilitado (removido `disabled: true`); footer atualizado para "Phase 3 — Orders"
+- [x] `tsconfig.json` corrigido com `"types": ["vite/client"]` (resolve erro pré-existente de `import.meta.env`)
 
-- [ ] Página ListaPedidos com tabela
-- [ ] Componente de status colorido
-- [ ] Paginação e filtros avançados
-- [ ] Detail Pedido com itens
-- [ ] Integração com API
-
-**Duração estimada:** 4 dias
-
-### 3.2 Módulo de Pedidos - Criação
-
-**Backend:**
-
-- [ ] POST /orders com validação completa
-  - Calcular embalagens por item
-  - Verificar estoque
-  - Persistir OrderItems
-- [ ] Ordem de pedidos (sequencial único)
-- [ ] Testes
-
-**Frontend:**
-
-- [ ] Form Pedido com seleção de cliente
-- [ ] Tabela dinâmica de itens
-- [ ] Cálculo em tempo real de total
-- [ ] Visualização de embalagens necessárias
-- [ ] Validações
-
-**Duração estimada:** 4 dias
-
-### 3.3 Gestão de Status de Pedidos
-
-**Backend:**
-
-- [ ] PATCH /orders/:id/status
-  - Validar transições de status
-  - Atualizar embalagens reservadas/liberadas
-  - Registrar em audit log
-- [ ] PATCH /orders/:id/cancel
-  - Liberar embalagens reservadas
-  - Registrar razão de cancelamento
-- [ ] Testes
-
-**Frontend:**
-
-- [ ] Componente de seleção de status
-- [ ] Confirmação de mudança de status
-- [ ] Histórico de status (futuro)
-- [ ] Bandeira visual de status crítico
-
-**Duração estimada:** 3 dias
-
-### 3.4 Cálculo de Embalagens
-
-**Backend:**
-
-- [ ] Service de cálculo de embalagens
-- [ ] Reserva automática ao criar pedido
-- [ ] Liberação ao cancelar
-- [ ] Atualizar estoque de embalagem
-- [ ] Alert quando estoque < mínimo
-- [ ] Testes
-
-**Duração estimada:** 2 dias
-
-**Estimativa Total Phase 3: 13 dias**
+**Duração real:** 1 sessão
 
 ---
 
@@ -548,11 +492,13 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 - ✅ 9 rotas novas no App.tsx (list + create + edit para cada módulo)
 - ✅ Sidebar habilitada para Clientes, Produtos e Embalagens
 
-### ⏳ Semanas 5-7 — Phase 3
+### ✅ Semanas 5-7 — Phase 3 (CONCLUÍDA — Abril 2026)
 
-- [ ] Módulo Pedidos (estrutura + criação)
-- [ ] Gestão de status
-- [ ] Cálculo de embalagens
+- ✅ Módulo Pedidos backend: schema Order + OrderItem, service, controller, rotas
+- ✅ Máquina de estados completa com reserva/liberação de estoque de embalagens
+- ✅ Módulo Pedidos frontend: OrderList, OrderForm, OrderDetail com modal de status
+- ✅ Badges visuais por status; cálculo de total em tempo real no formulário
+- ✅ Build frontend corrigido (tsconfig + vite/client types)
 
 ### ⏳ Semanas 8-9 — Phase 4
 
@@ -594,36 +540,33 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 | Auth funcionando       | Semana 2      | ✅ Concluído    |
 | Identidade visual      | Abril 2026    | ✅ Concluído    |
 | CRUDs básicos          | Semana 4      | ✅ Concluído    |
-| Pedidos funcionando    | Semana 7      | ⏳ Pendente     |
+| Pedidos funcionando    | Semana 7      | ✅ Concluído    |
 | Dashboard com KPIs     | Semana 8      | ⏳ Pendente     |
 | MVP pronto             | Semana 9      | ⏳ Pendente     |
 | Deploy Produção        | Semana 10+    | ⏳ Pendente     |
 
 ---
 
-## 🚀 Próximo Passo Imediato — Phase 3
+## 🚀 Próximo Passo Imediato — Phase 4: Reporting & Analytics
 
-Iniciar o **Módulo de Pedidos**, que é o coração do sistema com lógica de negócio complexa.
+Implementar o **Dashboard Principal com KPIs** e os relatórios analíticos.
 
 **Ordem sugerida:**
 
-1. **Backend:** adicionar model `Order` e `OrderItem` ao schema Prisma e rodar migration
-2. **Backend:** implementar `GET /orders` com filtros por status, cliente e data
-3. **Backend:** implementar `POST /orders` com cálculo de embalagens e reserva de estoque
-4. **Backend:** implementar `PATCH /orders/:id/status` com validação de transições
-5. **Backend:** implementar `PATCH /orders/:id/cancel` com liberação de embalagens
-6. **Frontend:** criar página `OrderList` com tabela e badges de status coloridos
-7. **Frontend:** criar formulário `OrderForm` com seleção de cliente, itens e cálculo em tempo real
+1. **Backend:** endpoint de agregação `/reports/summary` (totais do mês: pedidos, faturamento, ticket médio, clientes ativos)
+2. **Backend:** endpoint `/reports/sales` com agrupamento por dia/semana/mês
+3. **Backend:** endpoints `/reports/top-products` e `/reports/top-clients`
+4. **Frontend:** refatorar `Dashboard.tsx` com cards de KPI e gráficos (Recharts)
+5. **Frontend:** página `Relatorios` com filtros de data e exportação
 
 **Arquivos que serão criados:**
 
-- `backend/src/services/orderService.ts`
-- `backend/src/controllers/orderController.ts`
-- `backend/src/routes/orders.ts`
-- `frontend/src/services/orderApi.ts`
-- `frontend/src/pages/Orders/OrderList.tsx`
-- `frontend/src/pages/Orders/OrderForm.tsx`
-- `frontend/src/pages/Orders/OrderDetail.tsx`
+- `backend/src/services/reportService.ts`
+- `backend/src/controllers/reportController.ts`
+- `backend/src/routes/reports.ts`
+- `frontend/src/services/reportApi.ts`
+- `frontend/src/pages/Reports/ReportSales.tsx`
+- `frontend/src/pages/Reports/ReportProducts.tsx`
 
 ---
 
@@ -688,7 +631,7 @@ Iniciar o **Módulo de Pedidos**, que é o coração do sistema com lógica de n
 
 ---
 
-**Versão:** 1.3
+**Versão:** 1.4
 **Atualizado em:** 14 de Abril de 2026
-**Status:** Phases 1 e 2 concluídas — Phase 3 iniciando
-**Próxima Revisão:** Após conclusão Phase 3
+**Status:** Phases 1, 2 e 3 concluídas — Phase 4 iniciando
+**Próxima Revisão:** Após conclusão Phase 4

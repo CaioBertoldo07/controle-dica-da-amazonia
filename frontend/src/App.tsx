@@ -7,6 +7,9 @@ import { ProductList } from './pages/Products/ProductList';
 import { ProductForm } from './pages/Products/ProductForm';
 import { PackagingList } from './pages/Packagings/PackagingList';
 import { PackagingForm } from './pages/Packagings/PackagingForm';
+import { OrderList } from './pages/Orders/OrderList';
+import { OrderForm } from './pages/Orders/OrderForm';
+import { OrderDetail } from './pages/Orders/OrderDetail';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 
 function Protected({ children }: { children: React.ReactNode }) {
@@ -35,6 +38,11 @@ export function App() {
         <Route path="/embalagens" element={<Protected><PackagingList /></Protected>} />
         <Route path="/embalagens/nova" element={<Protected><PackagingForm /></Protected>} />
         <Route path="/embalagens/:id/editar" element={<Protected><PackagingForm /></Protected>} />
+
+        {/* Pedidos */}
+        <Route path="/pedidos" element={<Protected><OrderList /></Protected>} />
+        <Route path="/pedidos/novo" element={<Protected><OrderForm /></Protected>} />
+        <Route path="/pedidos/:id" element={<Protected><OrderDetail /></Protected>} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

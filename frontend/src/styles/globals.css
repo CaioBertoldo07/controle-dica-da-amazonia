@@ -80,6 +80,36 @@ textarea {
   color: #616161;
 }
 
+.badge--processando {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.badge--producao {
+  background-color: #fce4ec;
+  color: #880e4f;
+}
+
+.badge--preparado {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge--enviado {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+.badge--entregue {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+}
+
+.badge--cancelado {
+  background-color: #ffebee;
+  color: #b71c1c;
+}
+
 /* ─── Button base ─────────────────────────────────────────────────────────── */
 
 .btn {

@@ -38,3 +38,8 @@ export async function updateProduct(id: string, payload: ProductFormData): Promi
 export async function deactivateProduct(id: string): Promise<void> {
   await api.delete(`/products/${id}`);
 }
+
+export async function fetchProductsAll(): Promise<Product[]> {
+  const { data } = await api.get<PaginatedResponse<Product>>('/products?limit=1000&isActive=true');
+  return data.data;
+}

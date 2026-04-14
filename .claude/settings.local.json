@@ -14,7 +14,14 @@
       "Read(//tmp/**)",
       "Bash(npx tsc:*)",
       "Bash(ls src/)",
-      "Bash(ls prisma/)"
+      "Bash(ls prisma/)",
+      "Bash(npx prisma:*)",
+      "Bash(docker exec dica_amazonia_backend:*)",
+      "Bash(docker exec:*)",
+      "Bash(winpty docker:*)",
+      "Bash(docker cp:*)",
+      "Bash(npm run:*)",
+      "Bash(curl:*)"
     ]
   }
 }

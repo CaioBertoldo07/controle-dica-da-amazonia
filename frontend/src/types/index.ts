@@ -97,3 +97,49 @@ export interface Product {
 }
 
 export type ProductFormData = Omit<Product, 'id' | 'packaging' | 'createdAt' | 'updatedAt'>;
+
+// ─── Order ───────────────────────────────────────────────────────────────────
+
+export type OrderStatus =
+  | 'PENDENTE'
+  | 'PROCESSANDO'
+  | 'PRODUCAO'
+  | 'PREPARADO'
+  | 'ENVIADO'
+  | 'ENTREGUE'
+  | 'CANCELADO';
+
+export interface OrderItem {
+  id: string;
+  orderId: string;
+  productId: string;
+  product: { id: string; name: string; code: string };
+  quantity: number;
+  unitPrice: number;
+  subtotal: number;
+}
+
+export interface Order {
+  id: string;
+  orderNumber: string;
+  clientId: string;
+  client: { id: string; razaoSocial: string; nomeFantasia: string };
+  status: OrderStatus;
+  total: number;
+  notes?: string;
+  cancelReason?: string;
+  items: OrderItem[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateOrderItemInput {
+  productId: string;
+  quantity: number;
+}
+
+export interface CreateOrderInput {
+  clientId: string;
+  notes?: string;
+  items: CreateOrderItemInput[];
+}

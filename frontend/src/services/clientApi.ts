@@ -40,3 +40,8 @@ export async function updateClient(id: string, payload: ClientFormData): Promise
 export async function deactivateClient(id: string): Promise<void> {
   await api.delete(`/clients/${id}`);
 }
+
+export async function fetchClientsAll(): Promise<Client[]> {
+  const { data } = await api.get<PaginatedResponse<Client>>('/clients?limit=1000&isActive=true');
+  return data.data;
+}

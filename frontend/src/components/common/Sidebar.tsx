@@ -12,7 +12,7 @@ const navItems: NavItem[] = [
   { label: 'Clientes', to: '/clientes', icon: '👥' },
   { label: 'Produtos', to: '/produtos', icon: '📦' },
   { label: 'Embalagens', to: '/embalagens', icon: '🎁' },
-  { label: 'Pedidos', to: '/pedidos', icon: '📋', disabled: true },
+  { label: 'Pedidos', to: '/pedidos', icon: '📋' },
   { label: 'Relatórios', to: '/relatorios', icon: '📈', disabled: true },
 ];
 
@@ -110,7 +110,7 @@ export function Sidebar() {
           color: 'rgba(255,255,255,0.25)',
         }}
       >
-        Phase 2 — Core Modules
+        Phase 3 — Orders
       </div>
     </aside>
   );
