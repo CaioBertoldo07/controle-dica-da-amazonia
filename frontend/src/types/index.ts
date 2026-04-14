@@ -14,3 +14,86 @@ export interface ApiError {
   error: string;
   fields?: Record<string, string[]>;
 }
+
+export interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: Pagination;
+}
+
+// ─── Client ──────────────────────────────────────────────────────────────────
+
+export type ClientType = 'B2B' | 'B2C';
+
+export interface Client {
+  id: string;
+  cnpj: string;
+  razaoSocial: string;
+  nomeFantasia: string;
+  type: ClientType;
+  inscrEstadual?: string;
+  pessoaContatoNome: string;
+  pessoaContatoCPF?: string;
+  email: string;
+  telefone: string;
+  whatsapp: string;
+  endereco: string;
+  numero: string;
+  complemento?: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+  cep: string;
+  observacoes?: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type ClientFormData = Omit<Client, 'id' | 'createdAt' | 'updatedAt'>;
+
+// ─── Packaging ───────────────────────────────────────────────────────────────
+
+export type PackagingType = 'PADRAO' | 'ESPECIAL';
+
+export interface Packaging {
+  id: string;
+  name: string;
+  type: PackagingType;
+  description?: string;
+  unitCost: number;
+  currentStock: number;
+  minimumStock: number;
+  supplier?: string;
+  supplierContact?: string;
+  lastPurchaseDate?: string;
+  lastPurchaseQty?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type PackagingFormData = Omit<Packaging, 'id' | 'createdAt' | 'updatedAt'>;
+
+// ─── Product ─────────────────────────────────────────────────────────────────
+
+export interface Product {
+  id: string;
+  name: string;
+  description?: string;
+  code: string;
+  price: number;
+  packagingId: string;
+  packaging: { id: string; name: string; type: PackagingType };
+  isActive: boolean;
+  stock: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type ProductFormData = Omit<Product, 'id' | 'packaging' | 'createdAt' | 'updatedAt'>;

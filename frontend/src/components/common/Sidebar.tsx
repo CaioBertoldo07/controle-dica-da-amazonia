@@ -9,9 +9,9 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: 'Dashboard', to: '/', icon: '📊' },
-  { label: 'Clientes', to: '/clientes', icon: '👥', disabled: true },
-  { label: 'Produtos', to: '/produtos', icon: '📦', disabled: true },
-  { label: 'Embalagens', to: '/embalagens', icon: '🎁', disabled: true },
+  { label: 'Clientes', to: '/clientes', icon: '👥' },
+  { label: 'Produtos', to: '/produtos', icon: '📦' },
+  { label: 'Embalagens', to: '/embalagens', icon: '🎁' },
   { label: 'Pedidos', to: '/pedidos', icon: '📋', disabled: true },
   { label: 'Relatórios', to: '/relatorios', icon: '📈', disabled: true },
 ];
@@ -68,7 +68,7 @@ export function Sidebar() {
             <NavLink
               key={item.to}
               to={item.to}
-              end
+              end={item.to === '/'}
               style={({ isActive }) => ({
                 display: 'flex',
                 alignItems: 'center',
@@ -110,7 +110,7 @@ export function Sidebar() {
           color: 'rgba(255,255,255,0.25)',
         }}
       >
-        Phase 1 — Foundation
+        Phase 2 — Core Modules
       </div>
     </aside>
   );
