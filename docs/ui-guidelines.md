@@ -6,29 +6,39 @@ O sistema herda a identidade visual da Dica da Amazônia, com forte inspiração
 
 ### Paleta de Cores
 
+> Cores implementadas em `frontend/src/styles/variables.css` — Atualizado em Abril 2026.
+
 #### Cores Primárias
 
-| Nome           | Hex     | RGB          | Uso                                    |
-| -------------- | ------- | ------------ | -------------------------------------- |
-| Verde Floresta | #4A7A1E | 74, 122, 30  | Elementos principais, botões primários |
-| Verde Lima     | #BACE3C | 186, 206, 60 | Destaques, acentos secundários         |
-| Accent/Ouro    | #D4A800 | 212, 168, 0  | CTAs especiais, prêmios                |
+| Token CSS               | Hex       | Uso                                            |
+| ----------------------- | --------- | ---------------------------------------------- |
+| `--color-primary`       | `#2d5a27` | Botões primários, borda ativa da sidebar       |
+| `--color-primary-dark`  | `#1e3d1c` | Hover de botões primários                      |
+| `--color-primary-light` | `#4a7c43` | Acentos, estados hover leves                   |
+| `--color-accent`        | `#c8a84b` | CTAs especiais, destaques dourados             |
+
+#### Cores de Layout
+
+| Token CSS               | Hex       | Uso                                            |
+| ----------------------- | --------- | ---------------------------------------------- |
+| `--color-sidebar-bg`    | `#253d22` | Fundo da sidebar e header                      |
+| `--color-header-bg`     | `#ffffff` | Reservado (header usa sidebar-bg atualmente)   |
 
 #### Cores de Fundo e Superfícies
 
-| Nome                 | Hex     | RGB           | Uso                        |
-| -------------------- | ------- | ------------- | -------------------------- |
-| Background Principal | #F4F6F2 | 244, 246, 242 | Fundo geral do dashboard   |
-| Cards                | #FFFFFF | 255, 255, 255 | Superfícies de conteúdo    |
-| Dividers             | #E8EBDF | 232, 235, 223 | Separadores e bordas leves |
+| Token CSS          | Hex       | Uso                              |
+| ------------------ | --------- | -------------------------------- |
+| `--color-bg`       | `#f0ece3` | Fundo geral (creme amazônico)    |
+| `--color-surface`  | `#ffffff` | Cards, modais, inputs            |
+| `--color-divider`  | `#e5ddd2` | Separadores e bordas leves       |
 
 #### Cores de Texto
 
-| Nome                | Hex     | RGB           | Uso                                  |
-| ------------------- | ------- | ------------- | ------------------------------------ |
-| Texto Principal     | #1F2D1A | 31, 45, 26    | Títulos, corpo do texto              |
-| Texto Secundário    | #6B7A6E | 107, 122, 110 | Descrições, textos menos importantes |
-| Texto em Background | #FFFFFF | 255, 255, 255 | Texto em elementos coloridos         |
+| Token CSS                   | Hex       | Uso                                  |
+| --------------------------- | --------- | ------------------------------------ |
+| `--color-text-primary`      | `#2c2010` | Títulos, corpo do texto              |
+| `--color-text-secondary`    | `#7a6d5e` | Descrições, textos menos importantes |
+| `--color-text-on-primary`   | `#ffffff` | Texto sobre fundos escuros           |
 
 #### Cores de Status
 
@@ -525,6 +535,6 @@ Possível implementação futura:
 
 ---
 
-**Versão:** 1.0  
-**Data:** Abril de 2026  
-**Status:** Diretrizes completas
+**Versão:** 1.1
+**Atualizado em:** 14 de Abril de 2026
+**Status:** Identidade visual implementada — paleta atualizada para verde floresta amazônico

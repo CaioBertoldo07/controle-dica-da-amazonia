@@ -5,11 +5,11 @@
 O projeto é dividido em **5 fases principais** com duração total estimada de **16 semanas** (4 meses).
 
 ```
-Phase 1: Foundation
+Phase 1: Foundation          ✅ CONCLUÍDA
 ├─ Setup & Infraestrutura
 └─ Auth & Banco de Dados
     ↓
-Phase 2: Core Modules
+Phase 2: Core Modules        ← PRÓXIMO PASSO
 ├─ CRUD Clientes
 ├─ CRUD Produtos
 └─ CRUD Embalagens
@@ -33,7 +33,7 @@ Phase 5: Polish & Deploy
 
 ---
 
-## 🔧 PHASE 1: Foundation (Semanas 1-2)
+## ✅ PHASE 1: Foundation — CONCLUÍDA (Abril 2026)
 
 ### Objetivo
 
@@ -43,90 +43,91 @@ Preparar infraestrutura básica, autenticação e banco de dados.
 
 **Backend:**
 
-- [ ] Criar repositório GitHub
-- [ ] Inicializar projeto Node.js + TypeScript
-- [ ] Configurar package.json com dependências
-- [ ] Setup Express.js
-- [ ] Configurar ESLint + Prettier
-- [ ] Criar arquivo .env.example
-- [ ] Configurar nodemon para desenvolvimento
+- [x] Criar repositório GitHub
+- [x] Inicializar projeto Node.js + TypeScript
+- [x] Configurar package.json com dependências
+- [x] Setup Express.js
+- [x] Configurar ESLint + Prettier
+- [x] Criar arquivo .env.example
+- [x] Configurar nodemon para desenvolvimento
 
 **Frontend:**
 
-- [ ] Inicializar projeto Vite + React + TypeScript
-- [ ] Instalar dependências (React Router, Axios, etc)
-- [ ] Configurar ESLint + Prettier
-- [ ] Setup de estrutura de pastas
-- [ ] Criar arquivo .env.example
-
-**Duração:** 2 dias
+- [x] Inicializar projeto Vite + React + TypeScript
+- [x] Instalar dependências (React Router, Axios, Zustand)
+- [x] Configurar ESLint + Prettier
+- [x] Setup de estrutura de pastas
+- [x] Criar arquivo .env.example
 
 ### 1.2 Docker
 
 **Configuração dos Containers:**
 
-- [ ] Criar `docker-compose.yml` (serviços: `db` + `backend`)
-- [ ] Criar `backend/Dockerfile`
-- [ ] Criar `backend/.env.example` com variáveis do container
-- [ ] Subir container MySQL e validar conexão
-- [ ] Configurar volume persistente para os dados do banco
-
-**Duração:** 1 dia
+- [x] Criar `docker-compose.yml` (serviços: `db` + `backend`)
+- [x] Criar `backend/Dockerfile`
+- [x] Criar `backend/.env.example` com variáveis do container
+- [x] Subir container MySQL e validar conexão
+- [x] Configurar volume persistente para os dados do banco
 
 ### 1.3 Banco de Dados
 
 **MySQL Setup (via Docker):**
 
-- [ ] Validar conexão Prisma → container `db`
-- [ ] Configurar Prisma
-- [ ] Criar arquivo prisma/schema.prisma base
-- [ ] Gerar client Prisma
+- [x] Validar conexão Prisma → container `db`
+- [x] Configurar Prisma
+- [x] Criar arquivo prisma/schema.prisma base
+- [x] Gerar client Prisma
 
 **Schema Inicial:**
 
-- [ ] Tabela Client
-- [ ] Tabela Product
-- [ ] Tabela Packaging
-
-**Duração:** 2 dias
+- [x] Tabela User (autenticação e perfis)
+- [x] Tabela Client
+- [x] Tabela Product
+- [x] Tabela Packaging
+- [x] Tabela Order + OrderItem
+- [x] Seed inicial (usuário admin)
 
 ### 1.4 Autenticação
 
 **Backend:**
 
-- [ ] Implementar controller de login
-- [ ] Setup JWT
-- [ ] Middleware de autenticação
-- [ ] Validação de credentials
-- [ ] Endpoints POST /auth/login e POST /auth/refresh
+- [x] Implementar controller de login
+- [x] Setup JWT (access token + refresh token)
+- [x] Middleware de autenticação
+- [x] Validação de credentials (bcrypt)
+- [x] Endpoint POST /auth/login
+- [x] Endpoint POST /auth/refresh
+- [x] Controle de roles (admin, gestor, vendedor, operador)
 
 **Frontend:**
 
-- [ ] Criar página de Login
-- [ ] Implementar context/store para autenticação
-- [ ] Salvar token no localStorage
-- [ ] Criar hook useAuth
-- [ ] Implement protected routes
-
-**Duração:** 3 dias
+- [x] Criar página de Login
+- [x] Implementar store de autenticação (Zustand)
+- [x] Salvar token no localStorage
+- [x] Criar hook useAuth
+- [x] Implementar ProtectedRoute
+- [x] Redirecionamento automático após login/logout
 
 ### 1.5 Setup Inicial de UI
 
 **Frontend:**
 
-- [ ] Importar tipografia Open Sans
-- [ ] Configurar CSS variables (cores, spacing)
-- [ ] Criar tema global
-- [ ] Layout principal (Header, Sidebar, Footer)
-- [ ] Componentes base (Button, Input, Card)
-
-**Duração:** 2 dias
-
-**Estimativa Total Phase 1: 10 dias**
+- [x] Importar tipografia Open Sans (Google Fonts)
+- [x] Configurar CSS variables (cores, spacing, radius, shadows)
+- [x] Criar tema global (`globals.css` + `variables.css`)
+- [x] Layout principal (Header + Sidebar + área de conteúdo)
+- [x] Componentes base (classes `.btn`, `.form-input`, `.badge`)
+- [x] Dashboard com card de boas-vindas e informações do usuário
+- [x] Identidade visual aplicada com base nos designs da pasta `/design`:
+  - Paleta verde floresta + creme amazônico
+  - Header e Sidebar em verde escuro (`#253d22`)
+  - Fundo creme (`#f0ece3`)
+  - Tipografia hierárquica em marrom escuro
+  - Botões, inputs e badges com novo tema
 
 ---
 
-## 📊 PHASE 2: Core Modules (Semanas 3-4)
+## 📊 PHASE 2: Core Modules (Próxima — Semanas 3-4)
 
 ### Objetivo
 
@@ -155,7 +156,7 @@ Implementar CRUDs básicos para as 3 entidades principais.
 - [ ] Validações de formulário
 - [ ] Mensagens de sucesso/erro
 
-**Duração:** 5 dias
+**Duração estimada:** 5 dias
 
 ### 2.2 Módulo de Produtos
 
@@ -172,13 +173,13 @@ Implementar CRUDs básicos para as 3 entidades principais.
 
 **Frontend:**
 
-- [ ] PáginaListaProdutos
-- [ ] FormulárioCriarProduto
-- [ ] PáginaDetalhe
+- [ ] Página ListaProdutos
+- [ ] Formulário CriarProduto
+- [ ] Página Detalhe
 - [ ] Integração com API
 - [ ] Validações
 
-**Duração:** 3 dias
+**Duração estimada:** 3 dias
 
 ### 2.3 Módulo de Embalagens
 
@@ -194,12 +195,12 @@ Implementar CRUDs básicos para as 3 entidades principais.
 
 **Frontend:**
 
-- [ ] PáginaListaEmbalagens
-- [ ] FormulárioCriarEmbalagem
+- [ ] Página ListaEmbalagens
+- [ ] Formulário CriarEmbalagem
 - [ ] Widget de gerenciamento de estoque
 - [ ] Alert quando estoque < mínimo
 
-**Duração:** 3 dias
+**Duração estimada:** 3 dias
 
 **Estimativa Total Phase 2: 11 dias**
 
@@ -229,13 +230,13 @@ Implementar pedidos e lógica de negócio complexa.
 
 **Frontend:**
 
-- [ ] PáginaListaPedidos com tabela
+- [ ] Página ListaPedidos com tabela
 - [ ] Componente de status colorido
 - [ ] Paginação e filtros avançados
-- [ ] DetailPedido com itens
-- [ ] Integration com API
+- [ ] Detail Pedido com itens
+- [ ] Integração com API
 
-**Duração:** 4 dias
+**Duração estimada:** 4 dias
 
 ### 3.2 Módulo de Pedidos - Criação
 
@@ -243,20 +244,20 @@ Implementar pedidos e lógica de negócio complexa.
 
 - [ ] POST /orders com validação completa
   - Calcular embalagens por item
-  - Verificar estoque (se necessário)
+  - Verificar estoque
   - Persistir OrderItems
-- [ ] Ordem de pedidos (sequencial unique)
+- [ ] Ordem de pedidos (sequencial único)
 - [ ] Testes
 
 **Frontend:**
 
-- [ ] FormPedido com seleção de cliente
-- [ ] Tabel dinâmica de itens
+- [ ] Form Pedido com seleção de cliente
+- [ ] Tabela dinâmica de itens
 - [ ] Cálculo em tempo real de total
 - [ ] Visualização de embalagens necessárias
 - [ ] Validações
 
-**Duração:** 4 dias
+**Duração estimada:** 4 dias
 
 ### 3.3 Gestão de Status de Pedidos
 
@@ -264,7 +265,7 @@ Implementar pedidos e lógica de negócio complexa.
 
 - [ ] PATCH /orders/:id/status
   - Validar transições de status
-  - Atualizar embalagens, reservadas/liberadas
+  - Atualizar embalagens reservadas/liberadas
   - Registrar em audit log
 - [ ] PATCH /orders/:id/cancel
   - Liberar embalagens reservadas
@@ -278,7 +279,7 @@ Implementar pedidos e lógica de negócio complexa.
 - [ ] Histórico de status (futuro)
 - [ ] Bandeira visual de status crítico
 
-**Duração:** 3 dias
+**Duração estimada:** 3 dias
 
 ### 3.4 Cálculo de Embalagens
 
@@ -291,7 +292,7 @@ Implementar pedidos e lógica de negócio complexa.
 - [ ] Alert quando estoque < mínimo
 - [ ] Testes
 
-**Duração:** 2 dias
+**Duração estimada:** 2 dias
 
 **Estimativa Total Phase 3: 13 dias**
 
@@ -307,7 +308,7 @@ Implementar dashboard e relatórios analíticos.
 
 **Frontend:**
 
-- [ ] PáginaDashboard com layout de cards
+- [ ] Página Dashboard com layout de cards
 - [ ] KPI Cards:
   - Total de vendas (mês)
   - Número de pedidos (mês)
@@ -317,14 +318,14 @@ Implementar dashboard e relatórios analíticos.
   - Vendas ao longo do tempo
   - Produtos mais vendidos
 - [ ] Widget de pedidos recentes
-- [ ] Widget de alerts (estoque baixo, etc)
+- [ ] Widget de alertas (estoque baixo, etc)
 
 **Backend:**
 
 - [ ] Service de agregação de dados
 - [ ] Caching de KPIs (Redis, futuro)
 
-**Duração:** 4 dias
+**Duração estimada:** 4 dias
 
 ### 4.2 Relatório de Vendas
 
@@ -337,14 +338,14 @@ Implementar dashboard e relatórios analíticos.
 
 **Frontend:**
 
-- [ ] PáginaRelatórioVendas
-- [ ] Filtros de data picker
+- [ ] Página Relatório de Vendas
+- [ ] Filtros de date picker
 - [ ] Cards de resumo
 - [ ] Tabela com dados
 - [ ] Gráfico de linha
 - [ ] Exportar CSV (futuro)
 
-**Duração:** 3 dias
+**Duração estimada:** 3 dias
 
 ### 4.3 Relatório de Produtos
 
@@ -357,12 +358,12 @@ Implementar dashboard e relatórios analíticos.
 
 **Frontend:**
 
-- [ ] PáginaTopProdutos
+- [ ] Página Top Produtos
 - [ ] Ranking com posição
 - [ ] Gráfico de barras
 - [ ] Tabela com detalhes
 
-**Duração:** 2 dias
+**Duração estimada:** 2 dias
 
 ### 4.4 Relatório de Clientes
 
@@ -374,10 +375,10 @@ Implementar dashboard e relatórios analíticos.
 
 **Frontend:**
 
-- [ ] PáginaTopClientes
+- [ ] Página Top Clientes
 - [ ] Ranking e detalhes
 
-**Duração:** 2 dias
+**Duração estimada:** 2 dias
 
 ### 4.5 Relatório de Embalagens
 
@@ -390,11 +391,11 @@ Implementar dashboard e relatórios analíticos.
 
 **Frontend:**
 
-- [ ] PáginaAnáliseEmbalagens
+- [ ] Página Análise Embalagens
 - [ ] Cards de estoque
 - [ ] Alert de reordenação
 
-**Duração:** 2 dias
+**Duração estimada:** 2 dias
 
 **Estimativa Total Phase 4: 13 dias**
 
@@ -424,13 +425,13 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 - [ ] Checklist de cross-browser
 - [ ] Checklist de responsividade
 
-**Duração:** 3 dias
+**Duração estimada:** 3 dias
 
 ### 5.2 Otimizações
 
 **Backend:**
 
-- [ ] Implementar indices no BD
+- [ ] Implementar índices no BD
 - [ ] Analisar queries lentas
 - [ ] Compressão de respostas
 - [ ] Rate limiting
@@ -442,9 +443,9 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 - [ ] Lazy loading de componentes
 - [ ] Otimizar imagens
 - [ ] Analisar performance (Lighthouse)
-- [ ] Minificação de bundl
+- [ ] Minificação de bundle
 
-**Duração:** 2 dias
+**Duração estimada:** 2 dias
 
 ### 5.3 Segurança
 
@@ -464,7 +465,7 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 - [ ] Secure cookies
 - [ ] Dependency audit
 
-**Duração:** 2 dias
+**Duração estimada:** 2 dias
 
 ### 5.4 Documentação
 
@@ -472,7 +473,7 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 
 - [ ] README.md com setup
 - [ ] Documentação de API (Swagger, futuro)
-- [ ] Jusdocstrings em funções
+- [ ] Docstrings em funções
 - [ ] Comentários em lógica complexa
 
 **Frontend:**
@@ -482,7 +483,7 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 - [ ] JSDoc em componentes
 - [ ] Guia de componentes
 
-**Duração:** 1 dia
+**Duração estimada:** 1 dia
 
 ### 5.5 Deploy
 
@@ -508,68 +509,47 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 - [ ] Smoke tests
 - [ ] Monitoramento
 
-**Duração:** 2 dias
+**Duração estimada:** 2 dias
 
 **Estimativa Total Phase 5: 10 dias**
 
 ---
 
-## 📈 Timeline Detalhada
+## 📈 Timeline Real
 
-### Semana 1 (4 dias de trabalho)
+### ✅ Semanas 1-2 — Phase 1 (CONCLUÍDA — Abril 2026)
 
-- ✅ Setup inicial
-- ✅ Auth backend
-- 🟡 Auth frontend (parcial)
+- ✅ Setup inicial (repositório, Node.js, Vite, TypeScript)
+- ✅ Docker + MySQL via container
+- ✅ Schema Prisma completo (User, Client, Product, Packaging, Order, OrderItem)
+- ✅ Auth backend (JWT, bcrypt, refresh token, roles)
+- ✅ Auth frontend (Login, useAuth, Zustand store, ProtectedRoute)
+- ✅ Layout base (Header, Sidebar, Dashboard)
+- ✅ Sistema de design (CSS variables, globals, componentes base)
+- ✅ Identidade visual aplicada (tema verde floresta amazônico)
 
-### Semana 2 (5 dias de trabalho)
+### ⏳ Semanas 3-4 — Phase 2 (PRÓXIMA)
 
-- ✅ Auth frontend (completo)
-- ✅ Banco de dados
-- ✅ Setup UI frontend
+- [ ] Módulo Clientes (backend + frontend)
+- [ ] Módulo Produtos (backend + frontend)
+- [ ] Módulo Embalagens (backend + frontend)
 
-### Semana 3
+### ⏳ Semanas 5-7 — Phase 3
 
-- ✅ Módulo Clientes (backend)
-- ✅ Módulo Clientes (frontend)
-- ✅ Módulo Produtos (backend, parcial)
+- [ ] Módulo Pedidos (estrutura + criação)
+- [ ] Gestão de status
+- [ ] Cálculo de embalagens
 
-### Semana 4
+### ⏳ Semanas 8-9 — Phase 4
 
-- ✅ Módulo Produtos (backend + frontend)
-- ✅ Módulo Embalagens (backend)
-- ✅ Módulo Embalagens (frontend)
+- [ ] Dashboard com KPIs e gráficos
+- [ ] Relatórios (vendas, produtos, clientes, embalagens)
 
-### Semana 5
+### ⏳ Semana 10+ — Phase 5
 
-- ✅ Pedidos - Estrutura
-- ✅ Pedidos - Criação
-- 🟡 Gestão de Status (parcial)
-
-### Semana 6-7
-
-- ✅ Gestão de Status (completo)
-- ✅ Cálculo de Embalagens
-- 🟡 Dashboard (parcial)
-
-### Semana 8
-
-- ✅ Dashboard (completo)
-- ✅ Relatório de Vendas
-- ✅ Relatório de Produtos
-
-### Semana 9
-
-- ✅ Relatório de Clientes
-- ✅ Relatório de Embalagens
-- 🟡 Testes (parcial)
-
-### Semana 10+
-
-- ✅ Testes (completo)
-- ✅ Otimizações
-- ✅ Segurança
-- ✅ Deploy
+- [ ] Testes e QA
+- [ ] Otimizações e segurança
+- [ ] Deploy em produção
 
 ---
 
@@ -595,32 +575,56 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 
 ## 🎯 Milestones Críticos
 
-| Milestone           | Data         | Status       |
-| ------------------- | ------------ | ------------ |
-| Auth funcionando    | Fim Semana 2 | ✅ Critical  |
-| CRUDs básicos       | Fim Semana 4 | ✅ Critical  |
-| Pedidos funcionando | Fim Semana 7 | ✅ Critical  |
-| Dashboard básico    | Fim Semana 8 | 🟡 Important |
-| MVP pronto          | Fim Semana 9 | ✅ Critical  |
-| Deploy Prod         | Semana 10+   | 🟡 Important |
+| Milestone              | Data prevista | Status          |
+| ---------------------- | ------------- | --------------- |
+| Auth funcionando       | Semana 2      | ✅ Concluído    |
+| Identidade visual      | Abril 2026    | ✅ Concluído    |
+| CRUDs básicos          | Semana 4      | ⏳ Em andamento |
+| Pedidos funcionando    | Semana 7      | ⏳ Pendente     |
+| Dashboard com KPIs     | Semana 8      | ⏳ Pendente     |
+| MVP pronto             | Semana 9      | ⏳ Pendente     |
+| Deploy Produção        | Semana 10+    | ⏳ Pendente     |
+
+---
+
+## 🚀 Próximo Passo Imediato — Phase 2
+
+Iniciar o **Módulo de Clientes**, que é o primeiro CRUD completo do sistema.
+
+**Ordem sugerida:**
+
+1. **Backend:** criar rota `GET /clients` com paginação → testar via Postman/Insomnia
+2. **Backend:** implementar `POST /clients` com validação de CNPJ e email único
+3. **Backend:** implementar `PUT`, `PATCH` e `DELETE` (soft delete)
+4. **Frontend:** criar página `ListaClientes` com tabela e paginação
+5. **Frontend:** criar formulário `CriarCliente` com validações
+6. Repetir o ciclo para Produtos e Embalagens
+
+**Arquivos que serão criados:**
+
+- `backend/src/controllers/clientController.ts`
+- `backend/src/services/clientService.ts`
+- `backend/src/routes/clientRoutes.ts`
+- `frontend/src/pages/Clients/ListClients.tsx`
+- `frontend/src/pages/Clients/CreateClient.tsx`
 
 ---
 
 ## 📝 Dependências e Bloqueadores
 
-**Sem bloqueadores iniciais identificados.**
+**Sem bloqueadores ativos.**
 
 **Possíveis riscos:**
 
 - Indisponibilidade de servidor de hospedagem
 - Mudanças no escopo de requisitos
-- Atraso em integrações com serviços operacionais externos
+- Atraso em integrações com serviços externos
 
 ---
 
 ## 🔄 Iterações e Melhorias
 
-### Post-MVP (Future)
+### Post-MVP (Futuro)
 
 **Phase 6: Evoluções Internas**
 
@@ -646,22 +650,13 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 
 ## 📊 Métricas de Sucesso
 
-- ✅ 100% dos CRUDs implementados
-- ✅ Cobertura de testes > 80%
-- ✅ Performance: Dashboard carrega < 2s
-- ✅ Zero erros críticos em QA
-- ✅ 0 downtime após deploy
-- ✅ Usuários conseguem criar pedidos sem documentação
-
----
-
-## 🚀 Como Usar Este Roadmap
-
-1. **Estimativa:** Use como base para negociar prazos
-2. **Planejamento:** Divida em sprints de 1-2 semanas
-3. **Comunicação:** Compartilhe com cliente e equipe
-4. **Acompanhamento:** Mude status regularmente
-5. **Flexibilidade:** Adapte conforme necessário
+- ✅ Phase 1 concluída — Auth + infraestrutura + identidade visual
+- [ ] 100% dos CRUDs implementados
+- [ ] Cobertura de testes > 80%
+- [ ] Performance: Dashboard carrega < 2s
+- [ ] Zero erros críticos em QA
+- [ ] 0 downtime após deploy
+- [ ] Usuários conseguem criar pedidos sem documentação
 
 ---
 
@@ -676,7 +671,7 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 
 ---
 
-**Versão:** 1.0  
-**Data:** Abril de 2026  
-**Status:** Roadmap Finalizado  
-**Próxima Revisão:** Após conclusão Phase 1
+**Versão:** 1.1
+**Atualizado em:** 14 de Abril de 2026
+**Status:** Phase 1 concluída — Phase 2 iniciando
+**Próxima Revisão:** Após conclusão Phase 2

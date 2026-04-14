@@ -12,7 +12,9 @@
       "Bash(ls -la /c/Users/UEA-EST/Documents/GitHub/controle-dica-da-amazonia/frontend/.env*)",
       "Bash(cat)",
       "Read(//tmp/**)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(ls src/)",
+      "Bash(ls prisma/)"
     ]
   }
 }
