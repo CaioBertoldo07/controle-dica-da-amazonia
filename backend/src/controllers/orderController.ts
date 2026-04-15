@@ -17,8 +17,7 @@ const createOrderSchema = z.object({
         quantity: z.number().int().min(1).max(10000),
       }),
     )
-    .min(1, 'Informe ao menos 1 item')
-    .max(3, 'Máximo de 3 produtos distintos por pedido'),
+    .min(1, 'Informe ao menos 1 item'),
 });
 
 const updateStatusSchema = z.object({

@@ -157,7 +157,6 @@ export async function createOrder(input: CreateOrderInput) {
 
   // Validate items count
   if (!items || items.length === 0) throw Object.assign(new Error('Pedido deve ter pelo menos 1 item'), { statusCode: 422 });
-  if (items.length > 3) throw Object.assign(new Error('Pedido pode ter no máximo 3 produtos distintos'), { statusCode: 422 });
 
   // Check for duplicate products
   const productIds = items.map((i) => i.productId);

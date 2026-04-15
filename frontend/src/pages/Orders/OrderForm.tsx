@@ -42,7 +42,6 @@ export function OrderForm() {
   }, []);
 
   function addItem() {
-    if (items.length >= 3) return;
     setItems((prev) => [...prev, { productId: '', quantity: 1 }]);
   }
 
@@ -158,13 +157,11 @@ export function OrderForm() {
         <div style={{ background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)', padding: 'var(--space-xl)', marginBottom: 'var(--space-lg)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-lg)', paddingBottom: 'var(--space-sm)', borderBottom: '1px solid var(--color-divider)' }}>
             <h2 style={{ fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)' }}>
-              Produtos <span style={{ fontWeight: 400, fontSize: 13, color: 'var(--color-text-secondary)' }}>({items.length}/3)</span>
+              Produtos <span style={{ fontWeight: 400, fontSize: 13, color: 'var(--color-text-secondary)' }}>({items.length})</span>
             </h2>
-            {items.length < 3 && (
-              <button type="button" className="btn btn--outline btn--sm" onClick={addItem}>
-                + Adicionar Produto
-              </button>
-            )}
+            <button type="button" className="btn btn--outline btn--sm" onClick={addItem}>
+              + Adicionar Produto
+            </button>
           </div>
 
           {errors.items && <div className="form-error" style={{ marginBottom: 'var(--space-md)' }}>{errors.items}</div>}
