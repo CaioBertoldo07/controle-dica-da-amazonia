@@ -143,3 +143,65 @@ export interface CreateOrderInput {
   notes?: string;
   items: CreateOrderItemInput[];
 }
+
+// ─── Reports ──────────────────────────────────────────────────────────────────
+
+export interface ReportSummaryRecentOrder {
+  id: string;
+  orderNumber: string;
+  client: { id: string; razaoSocial: string; nomeFantasia: string };
+  status: OrderStatus;
+  total: number;
+  createdAt: string;
+}
+
+export interface ReportSummary {
+  currentMonth: {
+    orders: number;
+    revenue: number;
+    avgTicket: number;
+    deliveredOrders: number;
+  };
+  allTime: {
+    totalOrders: number;
+    totalRevenue: number;
+    activeClients: number;
+    activeProducts: number;
+  };
+  ordersByStatus: Partial<Record<OrderStatus, number>>;
+  lowStockPackagings: number;
+  recentOrders: ReportSummaryRecentOrder[];
+}
+
+export interface SalesDataPoint {
+  period: string;
+  orders: number;
+  revenue: number;
+}
+
+export interface TopProduct {
+  productId: string;
+  name: string;
+  code: string;
+  totalQuantity: number;
+  totalRevenue: number;
+  orderCount: number;
+}
+
+export interface TopClient {
+  clientId: string;
+  razaoSocial: string;
+  nomeFantasia: string;
+  orderCount: number;
+  totalRevenue: number;
+}
+
+export interface PackagingAnalysisItem {
+  id: string;
+  name: string;
+  type: PackagingType;
+  currentStock: number;
+  minimumStock: number;
+  needsReorder: boolean;
+  consumedLast30Days: number;
+}

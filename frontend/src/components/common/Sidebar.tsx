@@ -13,7 +13,7 @@ const navItems: NavItem[] = [
   { label: 'Produtos', to: '/produtos', icon: '📦' },
   { label: 'Embalagens', to: '/embalagens', icon: '🎁' },
   { label: 'Pedidos', to: '/pedidos', icon: '📋' },
-  { label: 'Relatórios', to: '/relatorios', icon: '📈', disabled: true },
+  { label: 'Relatórios', to: '/relatorios', icon: '📈' },
 ];
 
 export function Sidebar() {
@@ -110,7 +110,7 @@ export function Sidebar() {
           color: 'rgba(255,255,255,0.25)',
         }}
       >
-        Phase 3 — Orders
+        Phase 4 — Reporting
       </div>
     </aside>
   );

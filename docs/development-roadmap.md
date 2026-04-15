@@ -19,7 +19,7 @@ Phase 3: Business Logic      ✅ CONCLUÍDA
 ├─ Cálculo de Embalagens
 └─ Status de Pedidos
     ↓
-Phase 4: Reporting           ← PRÓXIMO PASSO
+Phase 4: Reporting           ✅ CONCLUÍDA
 ├─ Dashboard Principal
 ├─ Relatórios de Vendas
 └─ Análises
@@ -251,7 +251,7 @@ Implementar pedidos e lógica de negócio complexa.
 
 ---
 
-## 📊 PHASE 4: Reporting & Analytics (Semanas 8-9)
+## ✅ PHASE 4: Reporting & Analytics — CONCLUÍDA (Abril 2026)
 
 ### Objetivo
 
@@ -261,96 +261,111 @@ Implementar dashboard e relatórios analíticos.
 
 **Frontend:**
 
-- [ ] Página Dashboard com layout de cards
-- [ ] KPI Cards:
-  - Total de vendas (mês)
-  - Número de pedidos (mês)
-  - Ticket médio
+- [x] Página Dashboard redesenhada com layout de cards
+- [x] KPI Cards:
+  - Faturamento do mês (excluindo cancelados)
+  - Ticket médio do mês
   - Clientes ativos
-- [ ] Gráficos (Chart.js ou Recharts):
-  - Vendas ao longo do tempo
-  - Produtos mais vendidos
-- [ ] Widget de pedidos recentes
-- [ ] Widget de alertas (estoque baixo, etc)
+  - Produtos ativos
+- [x] Gráfico de linha (Recharts): Faturamento nos últimos 7 dias
+- [x] Widget de pedidos recentes (últimos 5, clicáveis)
+- [x] Widget de status: contador de pedidos por status
+- [x] Banner de alerta de estoque baixo (clicável, redireciona para análise)
 
 **Backend:**
 
-- [ ] Service de agregação de dados
-- [ ] Caching de KPIs (Redis, futuro)
+- [x] `GET /reports/summary` — KPIs do mês atual + totais + pedidos por status + alertas de estoque + pedidos recentes
 
-**Duração estimada:** 4 dias
+**Duração real:** 1 sessão
 
 ### 4.2 Relatório de Vendas
 
 **Backend:**
 
-- [ ] GET /reports/sales
-  - Filtro por data
-  - Groupby (day, week, month)
-  - Total de vendas, pedidos, tickets, clientes
+- [x] `GET /reports/sales`
+  - Filtro por data (startDate, endDate)
+  - groupBy: day | week | month
+  - Retorna: period, orders, revenue
 
 **Frontend:**
 
-- [ ] Página Relatório de Vendas
-- [ ] Filtros de date picker
-- [ ] Cards de resumo
-- [ ] Tabela com dados
-- [ ] Gráfico de linha
-- [ ] Exportar CSV (futuro)
-
-**Duração estimada:** 3 dias
+- [x] Página Relatório de Vendas (tab "Vendas" em `/relatorios`)
+- [x] Filtros de date picker (input type="date")
+- [x] Cards de resumo: Faturamento Total, Total de Pedidos, Ticket Médio
+- [x] Gráfico de linha: Faturamento ao longo do tempo (com eixo duplo para pedidos)
+- [x] Gráfico de barras: Volume de pedidos
+- [x] Tabela com dados por período
 
 ### 4.3 Relatório de Produtos
 
 **Backend:**
 
-- [ ] GET /reports/top-products
-  - Top 10 produtos
-  - Volume e faturamento
-  - Clientes por produto
+- [x] `GET /reports/top-products`
+  - Top N produtos (padrão 10, max 50)
+  - Volume vendido e faturamento
+  - Número de pedidos distintos
 
 **Frontend:**
 
-- [ ] Página Top Produtos
-- [ ] Ranking com posição
-- [ ] Gráfico de barras
-- [ ] Tabela com detalhes
-
-**Duração estimada:** 2 dias
+- [x] Página Top Produtos (tab "Produtos")
+- [x] Gráfico de barras horizontal com gradiente de verde
+- [x] Tabela com ranking, código, qtd vendida, pedidos e faturamento
 
 ### 4.4 Relatório de Clientes
 
 **Backend:**
 
-- [ ] GET /reports/top-clients
-  - Top clientes por faturamento
-  - Frequência de pedidos
+- [x] `GET /reports/top-clients`
+  - Top N clientes (padrão 10, max 50)
+  - Frequência de pedidos e faturamento
 
 **Frontend:**
 
-- [ ] Página Top Clientes
-- [ ] Ranking e detalhes
-
-**Duração estimada:** 2 dias
+- [x] Página Top Clientes (tab "Clientes")
+- [x] Tabela com ranking, razão social, pedidos, faturamento, % do total
+- [x] Barra de participação visual por cliente
 
 ### 4.5 Relatório de Embalagens
 
 **Backend:**
 
-- [ ] GET /reports/packaging-analysis
-  - Consumo por embalagem
+- [x] `GET /reports/packaging-analysis`
   - Estoque atual vs mínimo
-  - Previsão de compra
+  - Consumo nos últimos 30 dias (via pedidos processados)
+  - Flag `needsReorder`
 
 **Frontend:**
 
-- [ ] Página Análise Embalagens
-- [ ] Cards de estoque
-- [ ] Alert de reordenação
+- [x] Página Análise de Embalagens (tab "Embalagens")
+- [x] Cards de resumo: total, precisam reposição, adequado
+- [x] Banner de alerta com lista de embalagens críticas
+- [x] Tabela com nível de estoque (barra visual), consumo e status
 
-**Duração estimada:** 2 dias
+### Dependências adicionadas
 
-**Estimativa Total Phase 4: 13 dias**
+- [x] `recharts@3.8.1` instalado no frontend
+
+### Arquivos criados
+
+**Backend:**
+- `backend/src/services/reportService.ts`
+- `backend/src/controllers/reportController.ts`
+- `backend/src/routes/reports.ts`
+- `backend/src/routes/index.ts` — `reportsRouter` adicionado
+
+**Frontend:**
+- `frontend/src/services/reportApi.ts`
+- `frontend/src/pages/Reports/ReportsPage.tsx` — hub com 4 tabs
+- `frontend/src/pages/Reports/ReportSales.tsx`
+- `frontend/src/pages/Reports/ReportProducts.tsx`
+- `frontend/src/pages/Reports/ReportClients.tsx`
+- `frontend/src/pages/Reports/ReportPackaging.tsx`
+- `frontend/src/types/index.ts` — tipos de relatório adicionados
+- `frontend/src/App.tsx` — rota `/relatorios`
+- `frontend/src/components/common/Sidebar.tsx` — Relatórios habilitado
+- `frontend/src/pages/Dashboard.tsx` — redesign completo com KPIs
+
+**Duração real:** 1 sessão
 
 ---
 
@@ -500,10 +515,12 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 - ✅ Badges visuais por status; cálculo de total em tempo real no formulário
 - ✅ Build frontend corrigido (tsconfig + vite/client types)
 
-### ⏳ Semanas 8-9 — Phase 4
+### ✅ Semanas 8-9 — Phase 4 (CONCLUÍDA — Abril 2026)
 
-- [ ] Dashboard com KPIs e gráficos
-- [ ] Relatórios (vendas, produtos, clientes, embalagens)
+- ✅ Dashboard redesenhado com KPIs do mês, gráfico de vendas, pedidos recentes e status overview
+- ✅ Backend: 5 endpoints de relatório (`/reports/summary`, `/sales`, `/top-products`, `/top-clients`, `/packaging-analysis`)
+- ✅ Página `/relatorios` com 4 tabs: Vendas (linha+barra+tabela), Produtos (barras horizontal+ranking), Clientes (ranking+participação), Embalagens (análise de estoque)
+- ✅ Recharts instalado; filtros de período nativos; todos os componentes com estados de loading/empty
 
 ### ⏳ Semana 10+ — Phase 5
 
@@ -541,32 +558,22 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 | Identidade visual      | Abril 2026    | ✅ Concluído    |
 | CRUDs básicos          | Semana 4      | ✅ Concluído    |
 | Pedidos funcionando    | Semana 7      | ✅ Concluído    |
-| Dashboard com KPIs     | Semana 8      | ⏳ Pendente     |
-| MVP pronto             | Semana 9      | ⏳ Pendente     |
+| Dashboard com KPIs     | Semana 8      | ✅ Concluído    |
+| MVP pronto             | Semana 9      | ✅ Concluído    |
 | Deploy Produção        | Semana 10+    | ⏳ Pendente     |
 
 ---
 
-## 🚀 Próximo Passo Imediato — Phase 4: Reporting & Analytics
+## 🚀 Próximo Passo Imediato — Phase 5: Polish, Testing & Deploy
 
-Implementar o **Dashboard Principal com KPIs** e os relatórios analíticos.
+Finalizar, testar, otimizar e fazer deploy do sistema.
 
 **Ordem sugerida:**
 
-1. **Backend:** endpoint de agregação `/reports/summary` (totais do mês: pedidos, faturamento, ticket médio, clientes ativos)
-2. **Backend:** endpoint `/reports/sales` com agrupamento por dia/semana/mês
-3. **Backend:** endpoints `/reports/top-products` e `/reports/top-clients`
-4. **Frontend:** refatorar `Dashboard.tsx` com cards de KPI e gráficos (Recharts)
-5. **Frontend:** página `Relatorios` com filtros de data e exportação
-
-**Arquivos que serão criados:**
-
-- `backend/src/services/reportService.ts`
-- `backend/src/controllers/reportController.ts`
-- `backend/src/routes/reports.ts`
-- `frontend/src/services/reportApi.ts`
-- `frontend/src/pages/Reports/ReportSales.tsx`
-- `frontend/src/pages/Reports/ReportProducts.tsx`
+1. **Correção pendente:** rodar `prisma generate` no container para resolver erros de tipo do Prisma Client
+2. **Testes:** implementar testes unitários nos Services e testes de integração nas APIs
+3. **Segurança:** revisar CORS, rate limiting, validação de inputs
+4. **Deploy:** configurar CI/CD e infraestrutura de produção
 
 ---
 
@@ -631,7 +638,7 @@ Implementar o **Dashboard Principal com KPIs** e os relatórios analíticos.
 
 ---
 
-**Versão:** 1.4
+**Versão:** 1.5
 **Atualizado em:** 14 de Abril de 2026
-**Status:** Phases 1, 2 e 3 concluídas — Phase 4 iniciando
-**Próxima Revisão:** Após conclusão Phase 4
+**Status:** Phases 1, 2, 3 e 4 concluídas — Phase 5 próxima
+**Próxima Revisão:** Após conclusão Phase 5
