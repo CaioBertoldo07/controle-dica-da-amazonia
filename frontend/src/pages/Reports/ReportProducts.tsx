@@ -67,6 +67,17 @@ export function ReportProducts() {
         <button className="btn btn--primary btn--sm" onClick={load} disabled={loading}>
           {loading ? 'Carregando...' : 'Aplicar'}
         </button>
+        <button
+          className="btn btn--outline btn--sm"
+          disabled={loading}
+          onClick={() => {
+            const d = getDefaults();
+            setStartDate(d.startDate);
+            setEndDate(d.endDate);
+          }}
+        >
+          Limpar
+        </button>
       </div>
 
       {error && <div style={{ color: 'var(--color-error)', marginBottom: 'var(--space-lg)', fontSize: 14 }}>{error}</div>}

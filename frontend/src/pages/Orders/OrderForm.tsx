@@ -16,7 +16,7 @@ const inputStyle: React.CSSProperties = {
 
 interface ItemRow {
   productId: string;
-  quantity: number;
+  quantity: number | '';
 }
 
 export function OrderForm() {
@@ -28,7 +28,7 @@ export function OrderForm() {
 
   const [clientId, setClientId] = useState('');
   const [notes, setNotes] = useState('');
-  const [items, setItems] = useState<ItemRow[]>([{ productId: '', quantity: 1 }]);
+  const [items, setItems] = useState<ItemRow[]>([{ productId: '', quantity: '' }]);
 
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -42,7 +42,7 @@ export function OrderForm() {
   }, []);
 
   function addItem() {
-    setItems((prev) => [...prev, { productId: '', quantity: 1 }]);
+    setItems((prev) => [...prev, { productId: '', quantity: '' }]);
   }
 
   function removeItem(index: number) {
@@ -65,7 +65,7 @@ export function OrderForm() {
       else if (usedProducts.has(item.productId)) errs[`item_${i}_productId`] = 'Produto duplicado.';
       else usedProducts.add(item.productId);
 
-      if (!item.quantity || item.quantity < 1 || item.quantity > 10000)
+      if (item.quantity === '' || item.quantity < 1 || item.quantity > 10000)
         errs[`item_${i}_quantity`] = 'Entre 1 e 10.000.';
     });
 
@@ -76,7 +76,7 @@ export function OrderForm() {
   function getProductTotal() {
     return items.reduce((sum, item) => {
       const product = products.find((p) => p.id === item.productId);
-      return sum + (product ? product.price * item.quantity : 0);
+      return sum + (product && item.quantity !== '' ? product.price * item.quantity : 0);
     }, 0);
   }
 
@@ -168,7 +168,7 @@ export function OrderForm() {
 
           {items.map((item, index) => {
             const product = products.find((p) => p.id === item.productId);
-            const subtotal = product ? product.price * item.quantity : 0;
+            const subtotal = product && item.quantity !== '' ? product.price * item.quantity : 0;
             const availableProducts = products.filter(
               (p) => !selectedProductIds.includes(p.id) || p.id === item.productId
             );
@@ -199,7 +199,8 @@ export function OrderForm() {
                     min="1"
                     max="10000"
                     value={item.quantity}
-                    onChange={(e) => updateItem(index, 'quantity', parseInt(e.target.value) || 1)}
+                    placeholder="0"
+                    onChange={(e) => updateItem(index, 'quantity', e.target.value === '' ? '' : parseInt(e.target.value) || '')}
                   />
                   {errors[`item_${index}_quantity`] && <span className="form-error">{errors[`item_${index}_quantity`]}</span>}
                 </div>

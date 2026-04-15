@@ -4,6 +4,7 @@ import { AppLayout } from '../../components/common/AppLayout';
 import { PageHeader } from '../../components/common/PageHeader';
 import { Pagination } from '../../components/common/Pagination';
 import { fetchOrders } from '../../services/orderApi';
+import { formatDateBR } from '../../utils/date';
 import type { Order, OrderStatus, Pagination as PaginationType } from '../../types';
 
 const inputStyle: React.CSSProperties = {
@@ -130,7 +131,7 @@ export function OrderList() {
                     <span className={`badge ${STATUS_BADGE[order.status]}`}>{STATUS_LABELS[order.status]}</span>
                   </td>
                   <td style={{ padding: '12px 16px', color: 'var(--color-text-secondary)', fontSize: 13 }}>
-                    {new Date(order.createdAt).toLocaleDateString('pt-BR')}
+                    {formatDateBR(order.createdAt)}
                   </td>
                   <td style={{ padding: '12px 16px' }}>
                     <button

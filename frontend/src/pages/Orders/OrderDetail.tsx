@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AppLayout } from '../../components/common/AppLayout';
 import { PageHeader } from '../../components/common/PageHeader';
 import { fetchOrder, updateOrderStatus } from '../../services/orderApi';
+import { formatDateBR } from '../../utils/date';
 import type { Order, OrderStatus } from '../../types';
 
 const STATUS_LABELS: Record<OrderStatus, string> = {
@@ -202,8 +203,8 @@ export function OrderDetail() {
           <div style={{ background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)', padding: 'var(--space-xl)' }}>
             <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 'var(--space-md)', color: 'var(--color-text-primary)' }}>Informações do Pedido</h3>
             <InfoRow label="Nº Pedido" value={<span style={{ fontFamily: 'monospace', fontWeight: 600 }}>{order.orderNumber}</span>} />
-            <InfoRow label="Data" value={new Date(order.createdAt).toLocaleDateString('pt-BR')} />
-            <InfoRow label="Última atualização" value={new Date(order.updatedAt).toLocaleDateString('pt-BR')} />
+            <InfoRow label="Data" value={formatDateBR(order.createdAt)} />
+            <InfoRow label="Última atualização" value={formatDateBR(order.updatedAt)} />
           </div>
 
           <div style={{ background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)', padding: 'var(--space-xl)' }}>

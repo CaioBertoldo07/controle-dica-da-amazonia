@@ -12,6 +12,7 @@ import {
   Bar,
 } from 'recharts';
 import { fetchSalesOverTime } from '../../services/reportApi';
+import { formatPeriodBR, formatPeriodShortBR } from '../../utils/date';
 import type { SalesDataPoint } from '../../types';
 
 function toDateStr(date: Date) {
@@ -78,6 +79,18 @@ export function ReportSales() {
         <button className="btn btn--primary btn--sm" onClick={load} disabled={loading}>
           {loading ? 'Carregando...' : 'Aplicar'}
         </button>
+        <button
+          className="btn btn--outline btn--sm"
+          disabled={loading}
+          onClick={() => {
+            const d = getDefaults();
+            setStartDate(d.startDate);
+            setEndDate(d.endDate);
+            setGroupBy('day');
+          }}
+        >
+          Limpar
+        </button>
       </div>
 
       {error && <div style={{ color: 'var(--color-error)', marginBottom: 'var(--space-lg)', fontSize: 14 }}>{error}</div>}
@@ -102,7 +115,7 @@ export function ReportSales() {
           <ResponsiveContainer width="100%" height={260}>
             <LineChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-divider)" />
-              <XAxis dataKey="period" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <XAxis dataKey="period" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} tickFormatter={(v: string) => formatPeriodShortBR(v)} />
               <YAxis
                 yAxisId="revenue"
                 tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }}
@@ -116,6 +129,7 @@ export function ReportSales() {
                 width={40}
               />
               <Tooltip
+                labelFormatter={(l: unknown) => formatPeriodBR(String(l))}
                 formatter={(value: unknown, name: unknown) =>
                   name === 'revenue'
                     ? [`R$ ${Number(value).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 'Faturamento']
@@ -139,7 +153,7 @@ export function ReportSales() {
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-divider)" />
-              <XAxis dataKey="period" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} />
+              <XAxis dataKey="period" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} tickFormatter={(v: string) => formatPeriodShortBR(v)} />
               <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-secondary)' }} width={36} allowDecimals={false} />
               <Tooltip formatter={(v: unknown) => [Number(v), 'Pedidos']} />
               <Bar dataKey="orders" fill="#4a8c42" radius={[3, 3, 0, 0]} />
@@ -163,7 +177,7 @@ export function ReportSales() {
             <tbody>
               {data.map((row, i) => (
                 <tr key={i} style={{ borderBottom: '1px solid var(--color-divider)' }}>
-                  <td style={{ padding: '10px 16px', color: 'var(--color-text-primary)' }}>{row.period}</td>
+                  <td style={{ padding: '10px 16px', color: 'var(--color-text-primary)' }}>{formatPeriodBR(row.period)}</td>
                   <td style={{ padding: '10px 16px', textAlign: 'right', color: 'var(--color-text-primary)' }}>{row.orders}</td>
                   <td style={{ padding: '10px 16px', textAlign: 'right', fontWeight: 600 }}>
                     R$ {row.revenue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}

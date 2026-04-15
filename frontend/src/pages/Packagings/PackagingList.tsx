@@ -28,7 +28,7 @@ export function PackagingList() {
   const [page, setPage] = useState(1);
 
   const [stockModal, setStockModal] = useState<StockModal | null>(null);
-  const [stockQty, setStockQty] = useState(1);
+  const [stockQty, setStockQty] = useState<number | ''>('');
   const [stockLoading, setStockLoading] = useState(false);
   const [stockError, setStockError] = useState<string | null>(null);
 
@@ -50,7 +50,7 @@ export function PackagingList() {
 
   async function handleStockConfirm() {
     if (!stockModal) return;
-    if (!stockQty || stockQty < 1) { setStockError('Informe uma quantidade válida.'); return; }
+    if (stockQty === '' || stockQty < 1) { setStockError('Informe uma quantidade válida.'); return; }
     setStockLoading(true);
     setStockError(null);
     try {
@@ -132,13 +132,13 @@ export function PackagingList() {
                         <button className="btn btn--outline btn--sm" onClick={() => navigate(`/embalagens/${pkg.id}/editar`)}>Editar</button>
                         <button
                           className="btn btn--success-outline btn--sm"
-                          onClick={() => { setStockModal({ packaging: pkg, operation: 'add' }); setStockQty(1); setStockError(null); }}
+                          onClick={() => { setStockModal({ packaging: pkg, operation: 'add' }); setStockQty(''); setStockError(null); }}
                         >
                           + Entrada
                         </button>
                         <button
                           className="btn btn--warning-outline btn--sm"
-                          onClick={() => { setStockModal({ packaging: pkg, operation: 'remove' }); setStockQty(1); setStockError(null); }}
+                          onClick={() => { setStockModal({ packaging: pkg, operation: 'remove' }); setStockQty(''); setStockError(null); }}
                         >
                           − Saída
                         </button>
@@ -177,7 +177,8 @@ export function PackagingList() {
                 type="number"
                 min="1"
                 value={stockQty}
-                onChange={(e) => { setStockQty(parseInt(e.target.value) || 1); setStockError(null); }}
+                placeholder="0"
+                onChange={(e) => { setStockQty(e.target.value === '' ? '' : parseInt(e.target.value) || ''); setStockError(null); }}
               />
               {stockError && <span className="form-error">{stockError}</span>}
             </div>

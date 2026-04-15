@@ -12,6 +12,7 @@ import {
 import { AppLayout } from '../components/common/AppLayout';
 import { useAuthStore } from '../store/authStore';
 import { fetchReportSummary, fetchSalesOverTime } from '../services/reportApi';
+import { formatDateBR } from '../utils/date';
 import type { ReportSummary, SalesDataPoint, OrderStatus } from '../types';
 
 const STATUS_LABELS: Record<OrderStatus, string> = {
@@ -220,6 +221,9 @@ export function Dashboard() {
                     <div style={{ fontSize: 11, color: 'var(--color-text-secondary)', marginTop: 2 }}>
                       {order.client.nomeFantasia}
                     </div>
+                    <div style={{ fontSize: 10, color: 'var(--color-text-secondary)', marginTop: 1 }}>
+                      {formatDateBR(order.createdAt)}
+                    </div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-primary)' }}>
@@ -266,8 +270,22 @@ export function Dashboard() {
 }
 
 function KpiCard({ label, value, sub, color }: { label: string; value: string; sub: string; color: string }) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <div style={{ background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)', padding: 'var(--space-xl)', borderTop: `3px solid ${color}` }}>
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: 'var(--color-surface)',
+        borderRadius: 'var(--radius-md)',
+        boxShadow: hovered ? 'var(--shadow-md, 0 4px 16px rgba(0,0,0,0.12))' : 'var(--shadow-sm)',
+        padding: 'var(--space-xl)',
+        borderTop: `3px solid ${color}`,
+        transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
+        transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+        cursor: 'default',
+      }}
+    >
       <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 'var(--space-sm)' }}>
         {label}
       </div>
