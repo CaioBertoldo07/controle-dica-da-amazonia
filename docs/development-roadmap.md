@@ -379,19 +379,19 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 
 **Backend:**
 
-- [ ] Testes unitários (Services)
-- [ ] Testes de integração (API)
-- [ ] Cobertura mínima: 80%
-- [ ] Testes de validações
-- [ ] Testes de edge cases
+- [x] Testes unitários (Services) — authService, orderService, reportService
+- [x] Testes de integração (API) — /health, /auth/login, /orders
+- [ ] Cobertura mínima: 80% — cobertura forte nos fluxos críticos (44 testes passando)
+- [x] Testes de validações — login inválido, campos obrigatórios, formatos
+- [x] Testes de edge cases — cliente inativo, produto duplicado, quantidade fora do limite, transições inválidas de status
 
 **Frontend:**
 
-- [ ] Testes de componentes
-- [ ] Testes de integração
-- [ ] Testes E2E (Playwright)
-- [ ] Checklist de cross-browser
-- [ ] Checklist de responsividade
+- [x] Testes de componentes — ProtectedRoute, Login
+- [x] Testes de integração — authStore (login/logout, persistência)
+- [x] Testes E2E (Playwright) — configurado em `e2e/`; requer frontend + backend rodando
+- [ ] Checklist de cross-browser — fora de escopo (Phase 5 local)
+- [ ] Checklist de responsividade — fora de escopo (Phase 5 local)
 
 **Duração estimada:** 3 dias
 
@@ -399,19 +399,19 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 
 **Backend:**
 
-- [ ] Implementar índices no BD
-- [ ] Analisar queries lentas
-- [ ] Compressão de respostas
-- [ ] Rate limiting
-- [ ] Logging estruturado
+- [ ] Implementar índices no BD — dependente de análise de queries em produção
+- [ ] Analisar queries lentas — fora de escopo sem ambiente de produção
+- [x] Compressão de respostas — `compression` adicionado ao app.ts
+- [x] Rate limiting — `express-rate-limit` (100 req/min/IP)
+- [x] Logging estruturado — `pino` + `pino-http` com nível, método, rota, status
 
 **Frontend:**
 
-- [ ] Code splitting
-- [ ] Lazy loading de componentes
-- [ ] Otimizar imagens
-- [ ] Analisar performance (Lighthouse)
-- [ ] Minificação de bundle
+- [x] Code splitting — cada página é um chunk separado (React.lazy)
+- [x] Lazy loading de componentes — todas as rotas usam lazy loading com Suspense
+- [ ] Otimizar imagens — projeto não usa imagens significativas
+- [ ] Analisar performance (Lighthouse) — fora de escopo sem ambiente de produção
+- [x] Minificação de bundle — gerenciado pelo Vite (padrão)
 
 **Duração estimada:** 2 dias
 
@@ -419,19 +419,21 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 
 **Backend:**
 
-- [ ] Validar entrada em todos endpoints
-- [ ] CORS configurado
-- [ ] HTTPS forçado
-- [ ] Senha com bcrypt
-- [ ] SQL injection protection (Prisma)
-- [ ] Secrets em .env
+- [x] Validar entrada em todos endpoints — Zod em authController, orderController
+- [x] CORS configurado — origem restrita por ambiente
+- [ ] HTTPS forçado — fora de escopo (requer infraestrutura)
+- [x] Senha com bcrypt — já implementado, salt rounds=12
+- [x] SQL injection protection (Prisma) — queries parametrizadas + $queryRaw com template literals
+- [x] Secrets em .env — JWT_SECRET, DATABASE_URL, nunca commitados
+- [x] Security headers — `helmet` adicionado ao app.ts
+- [x] Logout automático em 401 — interceptor Axios no frontend
 
 **Frontend:**
 
-- [ ] XSS prevention
-- [ ] CSRF tokens
-- [ ] Secure cookies
-- [ ] Dependency audit
+- [x] XSS prevention — React escapa por padrão; sem dangerouslySetInnerHTML
+- [ ] CSRF tokens — não aplicável (auth via Bearer token, não cookies)
+- [ ] Secure cookies — não aplicável (token em localStorage por design atual)
+- [x] Dependency audit — `npm audit` sem vulnerabilidades críticas
 
 **Duração estimada:** 2 dias
 
@@ -439,17 +441,17 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 
 **Backend:**
 
-- [ ] README.md com setup
-- [ ] Documentação de API (Swagger, futuro)
-- [ ] Docstrings em funções
-- [ ] Comentários em lógica complexa
+- [x] README.md com setup — `backend/README.md` criado
+- [ ] Documentação de API (Swagger) — futuro
+- [ ] Docstrings em funções — não adicionadas (não solicitado)
+- [ ] Comentários em lógica complexa — não adicionados
 
 **Frontend:**
 
-- [ ] README.md com setup
-- [ ] Storybook (futuro)
-- [ ] JSDoc em componentes
-- [ ] Guia de componentes
+- [x] README.md com setup — `frontend/README.md` criado
+- [ ] Storybook — futuro
+- [ ] JSDoc em componentes — não adicionados
+- [x] Guia de componentes — documentado no README
 
 **Duração estimada:** 1 dia
 
@@ -522,11 +524,16 @@ Finalizar projeto, testar, otimizar e fazer deploy.
 - ✅ Página `/relatorios` com 4 tabs: Vendas (linha+barra+tabela), Produtos (barras horizontal+ranking), Clientes (ranking+participação), Embalagens (análise de estoque)
 - ✅ Recharts instalado; filtros de período nativos; todos os componentes com estados de loading/empty
 
-### ⏳ Semana 10+ — Phase 5
+### ✅ Semana 10+ — Phase 5 (CONCLUÍDA exceto deploy — Abril 2026)
 
-- [ ] Testes e QA
-- [ ] Otimizações e segurança
-- [ ] Deploy em produção
+- ✅ Testes unitários e integração backend (44 testes, Vitest + Supertest)
+- ✅ Testes unitários e integração frontend (Vitest + Testing Library)
+- ✅ E2E configurado com Playwright (requer ambiente rodando para executar)
+- ✅ Backend hardening: helmet, compression, rate-limit, pino logging
+- ✅ Frontend: lazy loading + code splitting de todas as rotas
+- ✅ Prisma Client regenerado (Order model agora no client)
+- ✅ Documentação: README raiz, backend/README, frontend/README
+- ⏳ Deploy em produção — fora de escopo desta fase
 
 ---
 

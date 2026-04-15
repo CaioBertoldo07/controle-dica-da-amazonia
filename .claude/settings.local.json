@@ -23,7 +23,12 @@
       "Bash(npm run:*)",
       "Bash(curl:*)",
       "Bash(npm install *)",
-      "Bash(npm list *)"
+      "Bash(npm list *)",
+      "Bash(npx vitest *)",
+      "Bash(node node_modules/vitest/vitest.mjs run)",
+      "Bash(node --experimental-vm-modules node_modules/.bin/vitest run --testPathPattern=\"authStore\")",
+      "Bash(npm test *)",
+      "Bash(npx vite *)"
     ]
   }
 }
